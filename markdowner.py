@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """Remove header lines & minimize whitespace from markdown files."""
 
 from pathlib import Path
