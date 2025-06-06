@@ -1,19 +1,18 @@
 #!/usr/bin/python
-"""Remove blank lines & headers from .md files."""
+"""Remove header lines & minimize whitespace from markdown files."""
 
-import os
-import sys
+from pathlib import Path
 
-for fname in os.listdir(sys.argv[1]):
+EXT = '*.md'
+DIR = '.'
+HDR = '#'
 
-    if fname.endswith('.md'):
-        fpath = os.path.join(sys.argv[1], fname)
+for path in Path(DIR).rglob(EXT):
 
-        with open(fpath, 'r', encoding='utf-8') as fobj:
+    with open(path) as file:  # pylint: disable=unspecified-encoding
 
-            for line in fobj:
-                tokens = line.strip().split()
+        for line in file:  # NOTE Could be dir!
+            tokens = line.strip().split()
 
-                # Filter leading whitespace, blank lines, & header lines
-                if tokens and not tokens[0][0] == '#':
-                    print(' '.join(tokens))
+            if tokens and not tokens[0][0] == HDR:
+                print(' '.join(tokens))
